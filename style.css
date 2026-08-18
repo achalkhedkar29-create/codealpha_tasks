@@ -1,104 +1,313 @@
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    background: linear-gradient(135deg, #1a1028, #30204a);
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+    color: #0369a1;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 10px 0 30px;
+
+    text-shadow: 2px 3px 8px rgba(3, 105, 161, 0.25);
+
+    position: relative;
+}
+h1::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #0284c7;
+    border-radius: 10px;
+    margin: 10px auto 0;
+}
+
+.search-box {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
-/* Calculator */
-.calculator {
-    background: #241936;
-    padding: 25px;
-    border-radius: 22px;
-    width: 320px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+.search-box input {
+    width: 300px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-/* Display */
-#display {
-    width: 100%;
-    height: 70px;
-    font-size: 32px;
-    text-align: right;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-
-    background: #f8f5ff;
-    color: #241936;
+.search-box button {
+    padding: 12px 20px;
+    font-size: 16px;
     border: none;
-    border-radius: 14px;
-    padding: 10px 15px;
-    outline: none;
-}
-
-/* Buttons Grid */
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-/* All Buttons */
-button {
-    height: 60px;
-    font-size: 21px;
-    font-weight: 600;
-    border: none;
-    border-radius: 14px;
+    border-radius: 6px;
     cursor: pointer;
-
-    background: #f3efff;
-    color: #332044;
-
-    transition: all 0.2s ease;
 }
 
-/* Hover */
-button:hover {
-    background: #dcd0ff;
-    transform: translateY(-3px);
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+ 
+.gallery-item {
+   overflow: hidden;
+   border-radius: 10px;
+ }
+
+ .gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+ }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
 }
 
-/* Click Effect */
-button:active {
-    transform: scale(0.95);
+.lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
 }
 
-/* Operator Buttons */
-button:nth-child(4),
-button:nth-child(8),
-button:nth-child(12),
-button:nth-child(16) {
-    background: #8b5cf6;
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
     color: white;
+    font-size: 40px;
+    cursor: pointer;
 }
 
-button:nth-child(4):hover,
-button:nth-child(8):hover,
-button:nth-child(12):hover,
-button:nth-child(16):hover {
-    background: #7c3aed;
-}
-
-/* AC Button */
-button:nth-child(1) {
-    background: #ff6b81;
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 45px;
     color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-button:nth-child(1):hover {
-    background: #f43f5e;
+.prev {
+    left: 30px;
 }
 
-/* Delete Button */
-button:nth-child(2) {
-    background: #c4b5fd;
-    color: #30204a;
+.next {
+    right: 30px;
 }
 
-button:nth-child(2):hover {
-    background: #a78bfa;
+.gallery-item img {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 180px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 200px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .search-box {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.filter-buttons button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   BLUE MODERN THEME
+========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px;
+    background: #eef6ff;
+    color: #12304a;
+}
+
+/* Main Heading */
+h1 {
+    text-align: center;
+    color: #075985;
+    font-size: 42px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 300px;
+    padding: 12px 16px;
+    border: 2px solid #38bdf8;
+    border-radius: 25px;
+    outline: none;
+    font-size: 15px;
+    background: white;
+}
+
+.search-box input:focus {
+    border-color: #0284c7;
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+}
+
+.search-box button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #0284c7;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.search-box button:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0 30px;
+    flex-wrap: wrap;
+}
+
+.filter-buttons button {
+    padding: 10px 20px;
+    border: 2px solid #0284c7;
+    border-radius: 25px;
+    background: white;
+    color: #0369a1;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background: #0284c7;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Gallery */
+.gallery {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Gallery Card */
+.gallery-item {
+    background: white;
+    padding: 8px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(3, 105, 161, 0.15);
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.gallery-item:hover {
+    box-shadow: 0 10px 25px rgba(3, 105, 161, 0.30);
+    transform: translateY(-5px);
+}
+
+/* Gallery Images */
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.04);
 }
